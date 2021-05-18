@@ -34,34 +34,19 @@ const menu = {
             name: dishName,
             price: dishPrice,
         };
-        if (courseName === 'appetizers') {
-            this._courses.appetizers.push(dish);
-        } else if (courseName === 'mains') {
-            this._courses.mains.push(dish);
-        } else if (courseName === 'desserts') {
-            this._courses.desserts.push(dish);
-        }
+        return this._courses[courseName].push(dish);
     },
     getRandomDishFromCourse(courseName) {
-        let dishes = [];
-        if (courseName === 'appetizers') {
-            this._courses.appetizers.push(dishes);
-        } else if (courseName === 'mains') {
-            this._courses.mains.push(dishes);
-        } else if (courseName === 'desserts') {
-            this._courses.desserts.push(dishes);
-        }
-
-        let randomIndex = Math.floor(Math.random() * dishes.length);
+        const dishes = this._courses[courseName];
+        const randomIndex = Math.floor(Math.random() * dishes.length);
         return dishes[randomIndex];
     },
     generateRandomMeal() {
-        let appetizers = this.getRandomDishFromCourse('appetizers');
-        let mains = this.getRandomDishFromCourse('mains');
-        let desserts = this.getRandomDishFromCourse('desserts');
-        let totalCost =
-            this.appetizers.price + this.mains.price + this.desserts.price;
-        return `You ordered ${appetizers}, ${mains} and ${desserts}. The total cost of all this is ${totalCost} USD.`;
+        const appetizer = this.getRandomDishFromCourse('appetizers');
+        const main = this.getRandomDishFromCourse('mains');
+        const dessert = this.getRandomDishFromCourse('desserts');
+        const totalCost = main.price + dessert.price + appetizer.price;
+        return `You ordered ${appetizer.name}, ${main.name} and ${dessert.name}. The total cost of all this is ${totalCost}$.`;
     },
 };
 
